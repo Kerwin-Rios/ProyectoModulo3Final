@@ -31,4 +31,4 @@ jobs:
     - name: Intalar Surge
       run: npm install --global surge
     - name: Deploy to Surge
-      run: surge ./build ${{vars.SURGE_URL}} --token ${{secrets.SURGE_TOKEN}}
+      run: surge ./build https://strong-brake.surge.sh/ --token efab91bfa09cd8b58afa2d149c3efd29
