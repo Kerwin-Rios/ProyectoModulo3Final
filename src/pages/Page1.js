@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Layout, Typography, List} from 'antd';
-import TaskForm from './components/TaskForm';
-import TaskItem from './components/TaskItem';
+import TaskForm from './components/TaskForm.js';
+import TaskItem from './components/TaskItem.js';
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
