@@ -1,10 +1,74 @@
 import React, { useState, useEffect } from 'react';
-import {Layout, Typography, List} from 'antd';
-import TaskForm from './components/TaskForm.js';
-import TaskItem from './components/TaskItem.js';
+import {Layout, Typography, List, Input, Form, Button, message, Space} from 'antd';
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
+const { Text } = Typography;
+
+function TaskForm({ addTask }) {
+  const [text, setText] = useState('');
+  const [time, setTime] = useState('');
+
+  const handleSubmit = () => {
+    if (!text || !time) {
+      message.error('¡Por favor ingresa una tarea y una hora!');
+      return;
+    }
+    addTask(text, time);
+    setText('');
+    setTime('');
+  };
+
+  return (
+    <Form layout="vertical" onFinish={handleSubmit} style={{ marginBottom: 20 }}>
+      <Form.Item label="Tarea">
+        <Input
+          placeholder="Nueva tarea"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+      </Form.Item>
+      <Form.Item label="Hora">
+        <Input
+          type="time"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+        />
+      </Form.Item>
+      <Button type="primary" htmlType="submit">
+        Añadir Tarea
+      </Button>
+    </Form>
+  );
+}
+
+function TaskItem({ task, toggleTask, removeTask }) {
+  return (
+    <List.Item
+      style={{
+        backgroundColor: task.completed ? '#d4ed91' : '#e9ecef',
+        marginBottom: 8,
+        borderRadius: 8,
+        padding: 16,
+      }}
+      actions={[
+        <Button type="primary" onClick={() => toggleTask(task.id)}>
+          {task.completed ? 'Desmarcar' : 'Marcar'}
+        </Button>,
+        <Button danger onClick={() => removeTask(task.id)}>
+          Remover
+        </Button>,
+      ]}
+    >
+      <Space direction="vertical">
+        <Text strong delete={task.completed}>
+          {task.text}
+        </Text>
+        <Text type="secondary">Hora: {task.time}</Text>
+      </Space>
+    </List.Item>
+  );
+}
 
 const Page1 = () => {
   const [tasks, setTasks] = useState([]);
