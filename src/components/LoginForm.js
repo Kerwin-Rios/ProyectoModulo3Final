@@ -88,7 +88,7 @@ function LoginForm() {
         background: theme === 'light' ? '#f0f2f5' : '#1f1f1f',
         color: theme === 'light' ? '#000' : '#aaa'
       }}>
-        Derechos Reservados UTE ©2025 Creado por Jairo Jumbo
+        Derechos Reservados---Creado por KERS
       </Footer>
     </Layout>
   );
